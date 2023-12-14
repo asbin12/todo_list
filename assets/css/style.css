@@ -1,11 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 section {
-  background: rgb(63, 94, 251);
-  background: linear-gradient(
-    90deg,
-    rgba(63, 94, 251, 1) 0%,
-    rgba(175, 84, 103, 1) 100%
-  );
+  background-image: url("/assets/img/clock.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 body {
   margin: 0;
@@ -18,6 +16,7 @@ body {
   /* border: 1px solid red; */
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -28,11 +27,13 @@ body {
   /* box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1); */
   /* height: auto;
   /* width: auto; */
-  padding: 0px 20px;
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  padding: 5px 20px;
+  /* box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  background: rgb(207, 191, 191);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75); */
+  background: rgb(229, 222, 222);
+  border-radius: 15px;
+  border: 1px solid rgb(221, 215, 215);
   /* width: 800px; */
 }
 .listsOfTodo {
@@ -61,10 +62,10 @@ body {
   color: gray;
 }
 .input-btn input:focus {
-  transform: translate(0px, 3px);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  transform: translate(0px, 4px);
+  /* box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75); */
   background: white;
 }
 #todoList {
@@ -85,11 +86,11 @@ body {
   font-size: 20px;
   line-height: 20px;
   font-weight: 400;
-  color: white;
+  color: gray;
   width: 400px;
 }
 #todoList li:hover {
-  color: antiquewhite;
+  color: rgb(61, 57, 57);
 }
 .btn {
   padding: 10px;
@@ -105,8 +106,16 @@ body {
   background-color: rgb(153, 149, 143);
 }
 .btn:hover {
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  /* box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75); */
   background: rgb(207, 191, 191);
+  transform: scale(0.75);
+}
+
+.container-heading {
+  color: white;
+  font-size: 40px;
+  line-height: 46px;
+  font-weight: 700;
 }

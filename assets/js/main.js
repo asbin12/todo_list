@@ -13,21 +13,22 @@ const getTodoList = () => {
     let listItems = document.createElement("li");
     listItems.innerHTML = inputText.value;
     todoList.appendChild(listItems);
+    // console.log(todoList.innerHTML[0]);
+
     let delBtn = document.createElement("button");
     delBtn.classList.add("btn");
-    delBtn.innerHTML = "Delete";
-    todoListData();
+    delBtn.innerHTML = "x";
+    // todoListData();
     delBtn.addEventListener("click", () => {
-      // let listItemToRemove = delBtn.parentNode;
       listItems.remove();
       todoListData();
     });
     // listItems.remove());
     listItems.appendChild(delBtn);
-    todoListData();
   }
 
   inputText.value = " ";
+  todoListData();
 };
 addTodo.addEventListener("click", getTodoList);
 
@@ -41,12 +42,15 @@ todoList.addEventListener("click", (event) => {
 });
 
 const todoListData = () => {
-  localStorage.setItem("data", todoList.innerHTML);
+  const arr1 = Array.from[todoList.textContent];
+  localStorage.setItem("data", arr1[0]);
 };
 const showTodoListTask = () => {
-  todoList.innerHTML = localStorage.getItem("data");
+  const arr1 = Array.from[todoList.textContent];
+  arr1 = localStorage.getItem("data");
 };
 showTodoListTask();
+
 // const deleteTask
 // const delTodos = (btn) => {
 //   btn.parentElement.remove();
