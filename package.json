@@ -1,0 +1,23 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch ./json/todo.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asbin12/todo_list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asbin12/todo_list/issues"
+  },
+  "homepage": "https://github.com/asbin12/todo_list#readme",
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}
