@@ -1,80 +1,73 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 section {
-  background-image: url("/assets/img/clock.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: #949396;
 }
 body {
   margin: 0;
   padding: 0;
 }
-/* font-family: 'Lato', sans-serif; */
 .container {
   max-width: 1280px;
+  width: 600px;
   margin: 0 auto;
-  /* border: 1px solid red; */
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 .wrapper {
+  /* padding-top: 500px; */
   display: flex;
   flex-direction: column;
   gap: 12px;
-  /* box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1); */
-  /* height: auto;
-  /* width: auto; */
   padding: 5px 20px;
-  /* box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75); */
   background: rgb(229, 222, 222);
   border-radius: 15px;
   border: 1px solid rgb(221, 215, 215);
-  /* width: 800px; */
+  max-width: 450px;
+  position: relative;
+  /* overflow: hidden; */
 }
 .listsOfTodo {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   gap: 4px;
 }
 .input-btn {
   padding: 5px 0;
   display: flex;
   align-items: center;
+  /* margin: auto; */
+  justify-content: center;
   gap: 18px;
-  justify-content: space-between;
 }
 .input-btn input {
   font-family: "Inter", sans-serif;
-  /* font-family: "Lato", sans-serif; */
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
   outline: none;
   border: 1px solid rgb(227, 221, 221);
   border-radius: 10px;
-  padding: 10px;
-  width: 300px;
+  padding: 20px 10px;
+  /* text-align: center; */
+
   color: gray;
+  transition: ease-out;
 }
 .input-btn input:focus {
   transform: translate(0px, 4px);
-  /* box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75); */
+
   background: white;
   border: 1px solid rgb(184, 184, 117);
 }
+
 #todoList {
   padding: 0;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   gap: 10px;
 }
 
@@ -82,37 +75,48 @@ body {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  /* gap: 12px; */
   align-items: center;
   font-family: "Inter", sans-serif;
   font-size: 20px;
   line-height: 20px;
   font-weight: 400;
   color: gray;
-  width: 400px;
+  border: 1px solid rgb(212, 216, 161);
+  border-radius: 10px;
+  background-color: rgb(174, 170, 166);
+  padding: 0 0 0 10px;
+  transition: 1s linear;
 }
+#todoList li p {
+  padding-left: 60px;
+}
+/* #todoList li p:hover {
+  padding-left: 60px;
+} */
 #todoList li:hover {
-  color: rgb(61, 57, 57);
+  background-color: #9297c4;
+  color: #00ff0a;
+  transform: scale(1.05) translate(-25px, 0);
+  /* transform: ; */
+  /* transition: 1s ease-in-out; */
 }
 .btn {
-  padding: 10px;
+  padding: 8px;
   border-radius: 10px;
-  /* border: 1px solid rgb(218, 188, 188); */
   border: 1px solid rgb(227, 221, 221);
-  /* font-family: "Lato", sans-serif; */
   font-family: "Inter", sans-serif;
   font-size: 20px;
   line-height: 20px;
   font-weight: 400;
   color: white;
   background-color: rgb(153, 149, 143);
+  cursor: pointer;
+  transition: 1s linear;
 }
 .btn:hover {
-  /* box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75); */
   background: rgb(207, 191, 191);
-  transform: scale(0.75);
+  transform: scale(0.75) rotate(360deg);
+  /* transform: ; */
 }
 
 .container-heading {
@@ -120,4 +124,202 @@ body {
   font-size: 40px;
   line-height: 46px;
   font-weight: 700;
+  transition: 1s linear;
+  margin: 0;
 }
+
+#todoList div {
+  display: flex;
+  gap: 6px;
+  padding: 3px 4px;
+  position: relative;
+  margin-left: auto;
+}
+.listsOfTodo ul li {
+  transition: text-decoration 0.5s ease;
+}
+.listsOfTodo ul li.checked {
+  color: #777;
+  text-decoration: line-through;
+  transition: text-decoration 0.5s ease;
+}
+
+#todoList li div label input {
+  width: 80%;
+  height: 80%;
+  border-radius: 20px;
+  position: absolute;
+  top: 4px;
+  left: -54px;
+  display: none;
+}
+#todoList li div label span {
+  display: block;
+  width: 20px;
+  height: 25px;
+  position: absolute;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  top: 50%;
+  left: 15px;
+  transform: translate(-50%, -50%);
+}
+#todoList li div label span::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  bottom: 8px;
+  width: 0;
+  height: 0;
+  border: solid #00ff0a;
+  border-width: 0 6px 6px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: width 0.5s, height 0.5s, opacity 0.5s;
+}
+#todoList li div label input:checked ~ span::after {
+  width: 8px;
+  height: 18px;
+  opacity: 1;
+}
+input[type="checkbox"] {
+  margin: 0;
+}
+
+.parentDivStyle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 800px;
+}
+
+.delBtn {
+  color: rgb(193, 19, 19);
+}
+#addItemsHere {
+  /* padding: 10px 30px; */
+
+  margin-left: auto;
+}
+.hide {
+  display: none;
+}
+.add__btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 100%;
+  color: rgb(183, 163, 163);
+  font-size: 32px;
+  /* margin-left: auto; */
+}
+.add__btn:hover {
+  transform: scale(0.75);
+}
+.typing-demo {
+  width: 16ch;
+  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  color: #d4af8a;
+  /* color: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  opacity: 0.5; */
+  /* transform: rotate(360deg); */
+
+  /* transition: 1s linear; */
+  /* font-family: monospace; */
+  /* font-size: 2em; */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+.animate-charcter {
+  text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 34px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.heading__message {
+  margin: 0;
+}
+/*
+.upper__portion {
+  height: 300px;
+  width: 500px;
+  background: #bcf4f5;
+  border-radius: 50%;
+  position: absolute;
+  top: -220px;
+  left: -10px;
+  opacity: 1;
+  border: 1px solid yellowgreen;
+  transform: rotate(45deg);
+}
+.middle__portion {
+  height: 200px;
+  width: 500px;
+  background: yellowgreen;
+  border-radius: 50%;
+  position: absolute;
+  top: -150px;
+  left: -10px;
+  opacity: 2;
+  border: 1px solid black;
+  transform: rotate(-180deg);
+}
+.down__portion {
+  height: 100px;
+  width: 450px;
+  background: antiquewhite;
+  border-radius: 50%;
+  position: absolute;
+  top: -70px;
+  left: 4px;
+  opacity: 2;
+  border: 1px solid black;
+  transform: rotate(-180deg);
+}
+*/

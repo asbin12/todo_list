@@ -5,19 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo</title>
     <link rel="stylesheet" href="assets/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/5eafff2e57.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <section>
       <div class="container">
-        <h1 class="container-heading">Add Your Task!!!</h1>
+        <!-- <p class="dateAndTime"></p> -->
+        <h1 class="container-heading typing-demo">Add Your Task!!!</h1>
+        <h3 class="heading__message animate-charcter">
+          Have a wonderful day ✨✨
+        </h3>
         <div class="wrapper">
-          <form class="form input-btn">
-            <input name="todoItems" placeholder="Enter Your Task" id="inputText" />
+          <form class="form input-btn hide">
+            <input
+              name="todoItems"
+              placeholder="Enter Your Task"
+              id="inputText"
+            />
             <!-- <button class="btn" id="addBtn" onclick="addingTodo()">+</button> -->
-            <button class="btn" type="submit">+</button>
+            <button class="btn add__btn" type="submit">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </form>
           <div class="listsOfTodo">
             <ul id="todoList"></ul>
+          </div>
+          <div id="addItemsHere" class="btn add__btn">
+            <i class="fa-solid fa-plus"></i>
           </div>
         </div>
       </div>

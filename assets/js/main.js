@@ -1,26 +1,51 @@
 const todoList = document.getElementById("todoList");
+// const dateAndTime = document.querySelector(".dateAndTime");
 const formEl = document.querySelector(".form");
+
+// let dateTime = new Date();
+// dateAndTime.textContent = dateTime;
+const addItemsHere = document.getElementById("addItemsHere");
+
+addItemsHere.addEventListener("click", (e) => {
+  e.preventDefault();
+  // console.log("button is clicked");
+  formEl.classList.toggle("hide");
+  addItemsHere.classList.toggle("hide");
+  // formEl.style.display = "flex";
+  // addItemsHere.style.display = "none";
+  if (addItemsHere.classList.contains("hide")) {
+    addItemsHere.style.display = "none";
+  } else {
+    addItemsHere.style.display = ""; // This sets it to an empty string to remove the inline style
+  }
+});
+
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const formData = new FormData(formEl);
   const data = Object.fromEntries(formData);
   console.log(data);
+
   try {
-    const addTodoData = await fetch("http://localhost:3000/todoList", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    if (!addTodoData.ok) {
-      throw new Error("Failed to post new data");
+    if (data.todoItems === "") {
+      alert("You should enter task");
+    } else {
+      const addTodoData = await fetch("http://localhost:3000/todoList", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!addTodoData.ok) {
+        throw new Error("Failed to post new data");
+      }
     }
   } catch (error) {
     console.error(error);
   }
-
-  // console.log(formData.get("user"));
 });
 
 const showTodoList = async () => {
@@ -31,19 +56,94 @@ const showTodoList = async () => {
     }
     const data = await response.json();
     data.forEach((item) => {
+      const parentDiv = document.createElement("div");
+      parentDiv.classList.add("parentDivStyle");
+      const checkBoxParent = document.createElement("label");
+      const checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      const para = document.createElement("p");
+    
+      // para.classList.add("typing-demo");
+      const span = document.createElement("span");
       const listItems = document.createElement("li");
+      const wrapperBtn = document.createElement("div");
       const delBtn = document.createElement("button");
+      delBtn.classList.add("delBtn");
+      const editBtn = document.createElement("button");
+      para.textContent = item.todoItems;
       delBtn.classList.add("btn");
-      delBtn.textContent = "x";
-      listItems.textContent = item.todoItems;
+      editBtn.classList.add("btn");
+      delBtn.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+      editBtn.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>`;
+      checkbox.addEventListener("click", () => {
+        listItems.classList.toggle("checked", checkbox.checked);
+      });
       delBtn.addEventListener("click", () => deleteData(item.id));
+      editBtn.addEventListener("click", () => editData(item.id));
       todoList.appendChild(listItems);
-      listItems.appendChild(delBtn);
+      listItems.appendChild(parentDiv);
+      parentDiv.appendChild(para);
+      parentDiv.appendChild(wrapperBtn);
+      parentDiv.appendChild(checkBoxParent);
+      checkBoxParent.appendChild(checkbox);
+      checkBoxParent.appendChild(span);
+      wrapperBtn.appendChild(editBtn);
+      wrapperBtn.appendChild(delBtn);
     });
   } catch (error) {
     console.error(error);
   }
 };
+
+const editData = async (itemId) => {
+  try {
+    // Fetch the data for the specified item ID
+    const editResponse = await fetch(
+      `http://localhost:3000/todoList/${itemId}`,
+      {
+        method: "GET",
+      }
+    );
+
+    if (!editResponse.ok) {
+      throw new Error("Failed to fetch data for editing");
+    }
+
+    // Extract the data from the response
+    const data = await editResponse.json();
+
+    // Prompt the user for a new value
+    let userEdit = prompt("", data.todoItems);
+
+    // Check if the user entered a value
+    if (userEdit !== null && userEdit !== "") {
+      // Update the data with the new value
+      data.todoItems = userEdit;
+
+      // Make a PUT request to update the data on the server
+      const response = await fetch(`http://localhost:3000/todoList/${itemId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update data");
+      }
+
+      // Refresh the todo list after updating
+      // showTodoList();
+    } else {
+      // User did not change anything
+      alert("User did not change anything");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const deleteData = async (itemId) => {
   try {
     const deleteResponse = await fetch(
@@ -61,118 +161,3 @@ const deleteData = async (itemId) => {
   }
 };
 showTodoList();
-
-// deleteData()
-// const inputText = document.getElementById("inputText");
-// const addTodo = document.getElementById("addBtn");
-// // const delTodo = document.getElementById("delBtn");
-// // const buttons = document.querySelector("button");
-
-// const addingTodo = () => {
-//   if (inputText.value === "") {
-//     alert("You should first enter the task");
-//   } else {
-//     const listItems = document.createElement("li");
-//     listItems.innerHTML = inputText.value;
-//     todoList.appendChild(listItems);
-//     let delBtn = document.createElement("button");
-//     delBtn.classList.add("btn");
-//     delBtn.innerHTML = "x";
-//     listItems.appendChild(delBtn);
-//   }
-//   inputText.value = "";
-//   // localStorage.setItem("data", todoList.textContent);
-//   // todoListData();
-// };
-
-// todoList.addEventListener(
-//   "click",
-//   function (e) {
-//     if (e.target.tagName === "BUTTON") {
-//       e.target.parentElement.remove();
-//       localStorage.setItem("data", todoList.textContent);
-
-//       // todoListData();
-//     }
-//   },
-//   false
-// );
-// todoList.innerHTML = localStorage.getItem("data");
-// localStorage.getItem("data", todoList.textContent);
-
-// const getTodoList = () => {
-//   if (inputText.value === "") {
-//     alert("TodoList cannot be empty");
-//   } else {
-//     // localStorage.setItem("list", userInput);
-//     // listItems.textContent = localStorage.getItem("list");
-//     const listItems = document.createElement("li");
-//     listItems.innerHTML = inputText.value;
-//     todoList.appendChild(listItems);
-
-//     // console.log(todoList.innerHTML[0]);
-
-//     let delBtn = document.createElement("button");
-//     delBtn.classList.add("btn");
-//     delBtn.innerHTML = "x";
-//     // todoListData();
-//     delBtn.addEventListener("click", () => {
-//       listItems.remove();
-//       // todoListData();
-//     });
-//     // listItems.remove());
-//     listItems.appendChild(delBtn);
-//   }
-
-//   inputText.value = " ";
-//   // todoListData();
-// };
-// addTodo.addEventListener("click", getTodoList);
-
-// todoList.addEventListener("click", (event) => {
-//   if (event.target.classList.contains("btn")) {
-//     // Remove the parent li element
-//     let listItem = event.target.parentNode;
-//     listItem.remove();
-//     todoListData();
-//   }
-// });
-
-// const todoListData = () => {
-//   localStorage.setItem("data", todoList.textContent);
-//   // ("data", arr1[0]);
-// };
-// const showTodoListTask = () => {
-//   // const arr1 = Array.from[todoList.textContent];
-//   // arr1 = localStorage.getItem("data");
-//   // localStorage.getItem("data");
-//   localStorage.getItem("data");
-// };
-// showTodoListTask();
-
-// const deleteTask
-// const delTodos = (btn) => {
-//   btn.parentElement.remove();
-// };
-
-// getTodoList();
-// delBtn.id = "myDelBtn";
-// let parentOfDelBtn=todoList
-//   const deleteTodoList = () => {
-//     // const del = document.getElementById("myDelBtn");
-//     console.log(del);
-//   };
-// };
-// deleteTodoList();
-// delTodo.addEventListener("click", deleteTodoList);
-
-// let todoTask = inputText.value;
-// document.getElementById("TodoList").innerHTML = todoTask;
-
-// const del = document.getElementById("myDelBtn");
-// console.log(del);
-// delBtn.parentElement.remove();
-// const todoData = document.getElementById("inputText").value;
-// const data = {
-//   todoData,
-// };
